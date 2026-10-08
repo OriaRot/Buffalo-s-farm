@@ -41,5 +41,8 @@ npx http-server -p 8080
 
 ## העלאה לאוויר
 
-אפשר להעלות את התיקייה כמו שהיא לכל אחסון סטטי: GitHub Pages, Netlify או Cloudflare Pages.
-`404.html` משמש כעמוד שגיאה, ו-`sitemap.xml` ו-`robots.txt` נמצאים בשורש.
+מדריך מלא, צעד אחר צעד, כולל חיבור הדומיין bufalo.co.il, נמצא ב-[DEPLOY.md](DEPLOY.md).
+
+- `.nojekyll`: מבטל את העיבוד של Jekyll ב-GitHub Pages.
+- התיקיות עם השמות בעברית (`מתכונים/`, `צור-קשר/` וכו') ו-`products_gallery/`, `product-catalog/`: הפניות מהכתובות של האתר הישן לעמודים החדשים, כדי לשמור על הדירוג בגוגל.
+- `404.html`, `sitemap.xml`, `robots.txt`: נמצאים בשורש.
