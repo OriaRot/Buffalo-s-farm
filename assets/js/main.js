@@ -118,7 +118,7 @@
         dateStr = p[2] + "/" + p[1] + "/" + p[0];
       }
       var lines = [
-        "שלום חוות הבופאלו! 🐃",
+        "שלום חוות הבופאלו!",
         "אשמח לתאם ביקור:",
         "",
         "• שם: " + name,
@@ -161,6 +161,30 @@
     reveals.forEach(function (el) { io.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  // ---------- Category chips: highlight current section ----------
+  var chipLinks = document.querySelectorAll(".chips a[href^='#']");
+  if (chipLinks.length && "IntersectionObserver" in window) {
+    var chipFor = {};
+    chipLinks.forEach(function (a) { chipFor[a.getAttribute("href").slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        chipLinks.forEach(function (a) { a.classList.remove("is-active"); });
+        var active = chipFor[entry.target.id];
+        if (active) {
+          active.classList.add("is-active");
+          var list = active.closest("ul");
+          var li = active.parentElement;
+          list.scrollLeft = li.offsetLeft - (list.clientWidth - li.offsetWidth) / 2;
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    Object.keys(chipFor).forEach(function (id) {
+      var section = document.getElementById(id);
+      if (section) spy.observe(section);
+    });
   }
 
   // ---------- Footer year ----------
